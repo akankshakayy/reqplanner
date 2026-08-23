@@ -132,6 +132,21 @@ repaired via retry, succeeding on the second attempt. This is included to
 show the worker doesn't escalate on every hiccup — only when it genuinely
 can't recover.
 
+## OpenClaw integration
+
+`openclaw-plugin/` is a real OpenClaw tool plugin (generated with
+`openclaw plugins init`, compiled against the actual `openclaw` npm
+package) that exposes this worker as two OpenClaw tools:
+`plan_requirement` and `submit_plan_feedback`. It shells out to this
+Python worker rather than reimplementing its logic in TypeScript, so the
+tested state machine, retry/repair logic, and audit logging stay in one
+place. See `openclaw-plugin/README.md` for exactly what's verified (TS
+compiles against the real SDK, the subprocess call path was run and
+returns correct results for both the happy path and the escalation path)
+versus what isn't yet (a full live OpenClaw Gateway run, which needs a
+newer Node runtime and a real LLM key than were available in the dev
+sandbox this was built in).
+
 ## What's autonomous now vs. what's next
 
 See the bottom of `AGENTS.md` for the full list. Short version: the worker

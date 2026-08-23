@@ -42,9 +42,22 @@ def cmd_run(args):
     client = build_client(args.inject_failure)
     worker = RequirementPlannerWorker(client=client)
 
-    print(f"[run_id={worker.logger.run_id}] Requirement:\n  {requirement}\n")
     result = worker.run(requirement)
 
+    if args.json_only:
+        # Machine-readable mode, e.g. for the OpenClaw tool plugin --
+        # no run_id banners or separators, just the structured result.
+        payload = {
+            "run_id": worker.logger.run_id,
+            "final_state": result.final_state.value,
+            "retries_used": result.retries_used,
+            "plan": result.plan.model_dump() if result.plan else None,
+            "escalation": result.escalation.model_dump() if result.escalation else None,
+        }
+        print(json.dumps(payload))
+        return
+
+    print(f"[run_id={worker.logger.run_id}] Requirement:\n  {requirement}\n")
     print(f"Final state: {result.final_state.value}")
     print(f"Retries used: {result.retries_used}")
     print("-" * 60)
@@ -82,6 +95,11 @@ def main():
         choices=["malformed_once", "tool_failure"],
         default=None,
         help="Demo flag: force the mock client to simulate a failure",
+    )
+    run_p.add_argument(
+        "--json-only",
+        action="store_true",
+        help="Print only a single-line JSON result (for programmatic callers, e.g. the OpenClaw plugin)",
     )
     run_p.set_defaults(func=cmd_run)
 
