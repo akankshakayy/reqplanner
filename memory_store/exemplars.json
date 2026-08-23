@@ -1,0 +1,16 @@
+[
+  {
+    "requirement": "As a customer, I want to save products to a wishlist so I can view and buy them later.",
+    "corrected_plan": {
+      "note": "This represents a HUMAN-CORRECTED version of output_1_plan.json \u2014 e.g. a PM/engineer fixed the endpoint naming to match the team's real convention (/api/v1/... instead of /api/...) and added a rate-limit validation rule the mock missed. Submitting this via `feedback` teaches the worker's exemplar store this correction so future similar requirements are planned closer to the team's real conventions.",
+      "requirement_summary": "Customers can add and remove products from a personal wishlist for later purchase.",
+      "corrected_fields": {
+        "api_endpoints[0].path": "/api/v1/wishlists",
+        "added_validation_rule": {
+          "field": "product_id",
+          "rule": "must reference an active, in-stock product"
+        }
+      }
+    }
+  }
+]

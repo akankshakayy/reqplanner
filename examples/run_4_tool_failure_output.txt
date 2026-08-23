@@ -1,0 +1,16 @@
+[run_id=b7c2118d] Requirement:
+  As a customer, I want to save products to a wishlist so I can view and buy them later.
+
+Final state: ESCALATED_TOOL_FAILURE
+Retries used: 0
+------------------------------------------------------------
+ESCALATED -- no plan was generated.
+{
+  "reason": "tool_failure",
+  "explanation": "A required tool call failed: Simulated tool failure (network timeout).",
+  "missing_information_needed": [],
+  "partial_plan": null,
+  "suggested_clarifying_questions": []
+}
+------------------------------------------------------------
+Audit log written to: logs/b7c2118d.jsonl

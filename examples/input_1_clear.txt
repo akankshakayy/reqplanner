@@ -1,0 +1,1 @@
+As a customer, I want to save products to a wishlist so I can view and buy them later.

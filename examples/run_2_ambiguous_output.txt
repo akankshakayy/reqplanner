@@ -1,0 +1,22 @@
+[run_id=a8ff6a5c] Requirement:
+  Build a feature for saving stuff.
+
+Final state: ESCALATED_AMBIGUOUS
+Retries used: 0
+------------------------------------------------------------
+ESCALATED -- no plan was generated.
+{
+  "reason": "ambiguous_requirement",
+  "explanation": "actor=MISSING, action=MISSING, word_count=6",
+  "missing_information_needed": [
+    "actor/user role",
+    "concrete action/verb"
+  ],
+  "partial_plan": null,
+  "suggested_clarifying_questions": [
+    "Who is the primary user/actor for this feature?",
+    "What specific action should the user be able to take?"
+  ]
+}
+------------------------------------------------------------
+Audit log written to: logs/a8ff6a5c.jsonl
