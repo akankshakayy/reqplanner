@@ -10,6 +10,7 @@ Built for Eko's internship evaluation assignment.
 > 📄 Full role/system definition: [`AGENTS.md`](./AGENTS.md)
 > 🧭 Reasoning principles: [`SOUL.md`](./SOUL.md)
 > 🔧 Tool contracts: [`TOOLS.md`](./TOOLS.md)
+> 🐾 OpenClaw runtime integration: [`CLAW.md`](./CLAW.md)
 
 ---
 
