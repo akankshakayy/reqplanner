@@ -5,7 +5,6 @@ structured, developer-ready technical plan — or, if the requirement isn't
 clear enough to plan safely, stops and asks the specific clarifying
 questions a human needs to answer first.
 
-Built for Eko's internship evaluation assignment.
 
 > 📄 Full role/system definition: [`AGENTS.md`](./AGENTS.md)
 > 🧭 Reasoning principles: [`SOUL.md`](./SOUL.md)
@@ -16,14 +15,14 @@ Built for Eko's internship evaluation assignment.
 
 ## Why this workflow
 
-Eko's brief was explicit that this shouldn't be a chatbot, a RAG demo, or a
+The intention was explicit that this shouldn't be a chatbot, a RAG demo, or a
 thin wrapper around an API call — it should show understanding of a real
 business workflow. The workflow here: **a PM writes a one-paragraph
 requirement, and an engineer needs a technical breakdown before they can
 start building.** That translation step is repetitive, is done by hand
 today, and has a very clear "should I proceed or should I ask a question
 first" decision point — which is exactly the kind of bounded, judgment-
-requiring workflow the brief asks for.
+requiring workflow we aimed for.
 
 ## Goal / System / User (short version — full version in `AGENTS.md`)
 
