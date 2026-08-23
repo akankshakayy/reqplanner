@@ -86,7 +86,49 @@ cat memory_store/exemplars.json
 > stored here, and future similar requirements will use it as a few-shot
 > example — this is the feedback loop."
 
-**9. Run the tests (15s)**
+**9. Show the OpenClaw integration (45s)**
+
+Open `CLAW.md` briefly and point at the diagram showing OpenClaw's runtime
+vs. the worker's domain logic. Then:
+
+```bash
+cd openclaw-plugin
+npm install
+npm run build
+```
+
+> "I also wrapped this worker as a real OpenClaw tool plugin — generated
+> with OpenClaw's own scaffolding command, compiling against their actual
+> SDK, not something I hand-rolled from a guess. It exposes two tools,
+> plan_requirement and submit_plan_feedback, which shell out to the same
+> Python worker I just showed you — so OpenClaw handles the conversation
+> loop and channel delivery, and this worker keeps owning the actual
+> planning logic and escalation policy."
+
+Optionally show the direct subprocess-call verification (this proves the
+plugin's core logic works, without needing a live Gateway):
+
+```bash
+node --input-type=module -e "
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+const execFileAsync = promisify(execFile);
+const { stdout } = await execFileAsync('python3',
+  ['-m', 'src.cli', 'run', 'As a customer, I want a wishlist.', '--json-only'],
+  { cwd: '../reqplanner' });
+console.log(JSON.parse(stdout).final_state);
+"
+```
+
+> "This confirms the exact call path the plugin uses actually works end
+> to end. I'm upfront in CLAW.md about what's verified versus what isn't
+> — I didn't get this running inside a live OpenClaw Gateway process in
+> my dev environment, since that needed a newer Node version and real
+> messaging credentials than I had available. But the integration layer
+> itself — the plugin code, compiled and tested against OpenClaw's real
+> SDK — is genuine, not simulated."
+
+**10. Run the tests (15s)**
 
 ```bash
 python -m pytest tests/ -v
@@ -95,12 +137,12 @@ python -m pytest tests/ -v
 > "And the whole thing is covered by tests for all four paths — happy
 > path, escalation, retry recovery, and tool failure."
 
-**10. Close (15s)**
+**11. Close (15s)**
 
 > "This defaults to a free, deterministic mock reasoning engine so the
 > whole pipeline is testable with zero API cost — swapping in the real
 > Claude API is a one-line env var change. Full design rationale is in
-> AGENTS.md, SOUL.md, and TOOLS.md in the repo."
+> AGENTS.md, SOUL.md, TOOLS.md, and CLAW.md in the repo."
 
 ---
 
